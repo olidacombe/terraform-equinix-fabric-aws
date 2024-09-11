@@ -48,18 +48,9 @@ variable "device_interface_id" {
   default     = 0
 }
 
-variable "speed" {
-  description = "Connection speed"
+variable "bandwidth" {
+  description = "Connection bandwidth in Mbps"
   type        = number
-}
-
-variable "speed_unit" {
-  description = "Connection speed unit"
-  type        = string
-  validation {
-    condition     = can(regex("^(MB|GB)$", var.speed_unit))
-    error_message = "Speed unit should be either MB (for Mbps) or GB (for Gbps)."
-  }
 }
 
 variable "aws_account_id" {
