@@ -1,6 +1,6 @@
 output "sp_name" {
   description = "Name of Equinix Fabric seller service profile used for a connection"
-  value       = data.equinix_ecx_l2_sellerprofile.this.name
+  value       = data.equinix_fabric_service_profile.this.0.name
 }
 
 output "id" {

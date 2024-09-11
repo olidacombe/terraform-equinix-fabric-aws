@@ -1,11 +1,15 @@
-data "equinix_ecx_l2_sellerprofile" "this" {
-  name = var.speed_unit == "GB" ? "AWS Direct Connect - High Capacity" : "AWS Direct Connect"
+data "equinix_fabric_service_profiles" "this" {
+  filter {
+    property = "/name"
+    operator = "="
+    values   = [var.speed_unit == "GB" ? "AWS Direct Connect - High Capacity" : "AWS Direct Connect"]
+  }
 }
 
 resource "equinix_ecx_l2_connection" "this" {
   name                  = var.name
   purchase_order_number = length(var.purchase_order_number) > 0 ? var.purchase_order_number : null
-  profile_uuid          = data.equinix_ecx_l2_sellerprofile.this.id
+  profile_uuid          = data.equinix_fabric_service_profile.this.0.id
   speed                 = var.speed
   speed_unit            = var.speed_unit
   notifications         = var.notifications
